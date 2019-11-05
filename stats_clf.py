@@ -190,7 +190,7 @@ class KNNeighbors:
             for idx in range(x.shape[0]-1):
                 dist[idx,idx+1:] = ((((x[idx]-x[idx+1:])**self.order).sum(axis=1))**(1/self.order)) 
             dist_mat = dist + dist.T
-            dist_mat_sorted = np.argsort(dist_mat,axis=1)[:,1:self.kneighbor+1]
+            dist_mat_sorted = np.argsort(dist_mat,axis=1)[:,:self.kneighbor]
             map_est = np.apply_along_axis(max_count,1,dist_mat_sorted, y)       #MAP estimate
             err = len(np.nonzero(map_est - y.T)[0])/y.shape[0]
             return err,1-err
