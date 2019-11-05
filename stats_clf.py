@@ -207,7 +207,7 @@ class KNNeighbors:
 
         if (len(x.shape) <= 1):
             dist = ((((x-self.x[:])**self.order).sum(axis=1))**(1/self.order)) 
-            kneighbors =  np.argsort(dist)[1:self.kneighbor+1]
+            kneighbors =  np.argsort(dist)[:self.kneighbor]
             return max_count(kneighbors,self.y)
         else:
             return [self.predict(x[idx]) for idx in range(x.shape[0])]
